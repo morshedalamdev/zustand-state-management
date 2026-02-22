@@ -4,15 +4,18 @@ import { useTodoStore } from "@/lib/todoStore";
 import { useEffect, useState } from "react";
 
 export default function TodoStats() {
+  const [mounted, setMounted] = useState(false);
+
   const getTodoStats = useTodoStore((state) => state.getTodoStats);
   const stats = getTodoStats();
 
   useEffect(() => {
+    setMounted(true);
   }, []);
 
-//   if (!mounted) {
-//     return <div className="mb-4 text-gray-500">Loading...</div>;
-//   }
+  if (!mounted) {
+    return <div className="mb-4 text-gray-500">Loading...</div>;
+  }
 
   return (
     <div className="mb-4 text-center">
