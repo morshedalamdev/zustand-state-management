@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function TodoItem({ todo }: { todo: Todo }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(todo.text);
+  const [editText, setEditText] = useState(todo.title);
 
   const deleteTodo = useTodoStore((state) => state.deleteTodo);
   const toggleTodo = useTodoStore((state) => state.toggleTodo);
@@ -20,7 +20,7 @@ export default function TodoItem({ todo }: { todo: Todo }) {
   };
 
   const handleCancelEdit = () => {
-    setEditText(todo.text);
+    setEditText(todo.title);
     setIsEditing(false);
   };
 
@@ -55,7 +55,7 @@ export default function TodoItem({ todo }: { todo: Todo }) {
               todo.completed ? "line-through text-gray-500" : "text-gray-800"
             }`}
           >
-            {todo.text}
+            {todo.title}
           </span>
         )}
       </div>

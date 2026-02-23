@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 
 interface TodoStore {
   todos: Todo[];
-  addTodo: (text: string) => void;
+  addTodo: (title: string) => void;
   deleteTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
   updateTodo: (id: string, newText: string) => void;
@@ -20,13 +20,13 @@ export const useTodoStore = create<TodoStore>()(
     (set, get) => ({
       todos: [],
       // CREATE
-      addTodo: (text: string) =>
+      addTodo: (title: string) =>
         set((state) => ({
           todos: [
             ...state.todos,
             {
               id: Date.now().toString(),
-              text,
+              title,
               completed: false,
               createdAt: new Date(),
             },
@@ -48,7 +48,7 @@ export const useTodoStore = create<TodoStore>()(
       updateTodo: (id: string, newText: string) =>
         set((state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === id ? { ...todo, text: newText } : todo,
+            todo.id === id ? { ...todo, title: newText } : todo,
           ),
         })),
       // COMPUTED VALUE
